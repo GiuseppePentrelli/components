@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Components · Giuseppe Pentrelli</title>
+  <meta name="description" content="I componenti UI di Giuseppe Pentrelli, fatti a mano in HTML, CSS e JavaScript: ognuno si apre da solo o si carica in un iframe.">
+  <meta name="author" content="Giuseppe Pentrelli">
+  <meta name="theme-color" content="#081929">
+  <link rel="canonical" href="https://giuseppepentrelli.github.io/components/">
+  <link rel="icon" type="image/svg+xml" href="/icon/favicon.svg">
+  <link rel="stylesheet" href="style.css">
+  <script src="components.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="intro">
+    <a class="back" href="/">← Novenix</a>
+    <h1>Components</h1>
+    <p class="lead">I componenti UI che costruisco a mano, in HTML, CSS e JavaScript. Ognuno ha una pagina sua: si apre da solo o si carica in un iframe.</p>
+    <p class="count" id="count"></p>
+  </header>
+
+  <nav class="filters" id="filters" aria-label="Filtra per categoria" hidden></nav>
+
+  <main class="grid" id="grid"></main>
+
+  <template id="tile-template">
+    <article class="tile">
+      <div class="preview">
+        <iframe loading="lazy"></iframe>
+      </div>
+      <div class="info">
+        <div class="heading">
+          <h2 class="name"></h2>
+          <span class="category"></span>
+        </div>
+        <p class="description"></p>
+        <div class="actions">
+          <a class="button open" target="_blank" rel="noopener">Apri</a>
+          <a class="button code" target="_blank" rel="noopener">Codice</a>
+          <button class="button copy" type="button">Copia iframe</button>
+        </div>
+        <details class="snippet">
+          <summary>Codice dell'iframe</summary>
+          <pre><code></code></pre>
+        </details>
+      </div>
+    </article>
+  </template>
+
+  <footer class="footer">
+    <p>Fatto da Giuseppe Pentrelli · <a href="https://github.com/GiuseppePentrelli/components">il codice su GitHub</a></p>
+  </footer>
+</body>
+</html>

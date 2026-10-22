@@ -1,0 +1,231 @@
+@font-face {
+  font-family: "Anta";
+  src: url("/fonts/anta-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --space-blue: rgb(8, 25, 41);
+  --space-deep: rgb(5, 16, 27);
+  --space-green: rgb(15, 140, 105);
+  --space-yellow: rgb(217, 166, 72);
+  --space-white: rgb(217, 202, 193);
+  --space-cyan: rgb(0, 255, 255);
+  --console-gray: rgb(55, 71, 79);
+  --muted: rgba(217, 202, 193, 0.7);
+  --line: rgba(217, 202, 193, 0.14);
+  --radius: 18px;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, rgba(15, 140, 105, 0.16), transparent 55%),
+    var(--space-blue);
+  color: var(--space-white);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+}
+
+a {
+  color: var(--space-yellow);
+}
+
+:focus-visible {
+  outline: 2px solid var(--space-cyan);
+  outline-offset: 3px;
+}
+
+.intro,
+.filters,
+.grid,
+.footer {
+  width: min(1200px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+.intro {
+  padding-block: 3rem 1.5rem;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2 {
+  font-family: "Anta", sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  letter-spacing: 0.02em;
+}
+
+.lead {
+  max-width: 60ch;
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.count {
+  margin: 0.5rem 0 0;
+  color: var(--space-green);
+  font-size: 0.9rem;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.filter {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--space-white);
+  font: inherit;
+  cursor: pointer;
+}
+
+.filter[aria-pressed="true"] {
+  border-color: var(--space-green);
+  background: rgba(15, 140, 105, 0.2);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr));
+  gap: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(5, 16, 27, 0.6);
+}
+
+.tile[hidden] {
+  display: none;
+}
+
+.preview {
+  background: var(--space-deep);
+  border-bottom: 1px solid var(--line);
+}
+
+.preview iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+
+.heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.name {
+  font-size: 1.4rem;
+}
+
+.category {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(217, 166, 72, 0.15);
+  color: var(--space-yellow);
+  font-size: 0.8rem;
+}
+
+.description {
+  margin: 0;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(55, 71, 79, 0.35);
+  color: var(--space-white);
+  font: inherit;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.button:hover {
+  border-color: var(--space-green);
+  background: rgba(15, 140, 105, 0.2);
+}
+
+.snippet summary {
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.snippet pre {
+  margin: 0.5rem 0 0;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 10px;
+  background: var(--space-deep);
+  font-size: 0.8rem;
+}
+
+.footer {
+  padding-block: 1.5rem 2.5rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
