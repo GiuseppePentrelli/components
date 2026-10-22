@@ -27,5 +27,5 @@ Un componente UI di fascia alta, interattivo e moderno, progettato per showcase 
 
 ```html
 <iframe src="https://giuseppepentrelli.github.io/components/cards/cars-card/"
-        title="Cars Card" loading="lazy" style="border:0; width:100%; height:660px"></iframe>
+        title="Cars Card" loading="lazy" style="border:0; width:100%; height:740px"></iframe>
 ```

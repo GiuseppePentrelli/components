@@ -256,3 +256,8 @@
         @media (max-height: 600px) {
             html:not(.is-embed) { --scale-h: 0.7; }
         }
+
+        /* dentro un iframe la pagina è alta quanto la card: spazio per l'ingrandimento in hover */
+        html.is-embed body {
+            padding-block: 40px;
+        }

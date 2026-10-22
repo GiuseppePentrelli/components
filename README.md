@@ -10,10 +10,10 @@ Ogni componente ha una pagina sua, che si apre da sola o si carica in un iframe:
 
 ```html
 <iframe src="https://giuseppepentrelli.github.io/components/cards/cars-card/"
-        title="Cars Card" loading="lazy" style="border:0; width:100%; height:660px"></iframe>
+        title="Cars Card" loading="lazy" style="border:0; width:100%; height:740px"></iframe>
 ```
 
-Dentro un iframe, la pagina del componente manda alla pagina che la carica un messaggio `{ type: 'component:height', height }` con l'altezza che le serve (`embed.js`). Chi la carica può ascoltarlo e adattare l'iframe, come fa la vetrina in `app.js`.
+Dentro un iframe la pagina del componente non scorre mai, perché `embed.js` mette `overflow: hidden` su `html` e `body`, e manda alla pagina che la carica un messaggio `{ type: 'component:height', height }` con l'altezza che le serve. Chi la carica può ascoltarlo e adattare l'iframe, come fa la vetrina in `app.js`.
 
 ## Aggiungere un componente
 
