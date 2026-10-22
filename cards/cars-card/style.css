@@ -224,29 +224,31 @@
         }
 
         /* --- LOGICA RESPONSIVE --- */
-        @media (max-width: 420px) {
-            .cardCar {
-                transform: scale(0.8);
-            }
-            .cardCar:hover {
-                transform: scale(0.85) rotateY(-5deg);
-            }
-                    .cardCar:hover .imgContainer {
-            transform: translateX(-30px) scale(1.2) translateZ(50px);
-        }
+        /* zoom rimpicciolisce anche lo spazio occupato: la card non si deforma e non lascia vuoti */
+        .cardCar {
+            flex-shrink: 0;
+            zoom: min(var(--zoom-w, 1), var(--zoom-h, 1));
         }
 
-        @media (max-width: 360px) {
-            .cardCar {
-                transform: scale(0.7);
+        @media (max-width: 500px) {
+            :root { --zoom-w: 0.8; }
+        }
+
+        @media (max-width: 420px) {
+            :root { --zoom-w: 0.72; }
+            .cardCar:hover .imgContainer {
+                transform: translateX(-30px) scale(1.2) translateZ(50px);
             }
-            .cardCar:hover {
-                transform: scale(0.75) rotateY(-5deg);
-            }
+        }
+
+        @media (max-width: 374px) {
+            :root { --zoom-w: 0.64; }
+        }
+
+        @media (max-width: 330px) {
+            :root { --zoom-w: 0.56; }
         }
 
         @media (max-height: 600px) {
-            .cardCar {
-                transform: scale(0.7);
-            }
+            html:not(.is-embed) { --zoom-h: 0.7; }
         }
