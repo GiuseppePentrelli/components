@@ -224,31 +224,35 @@
         }
 
         /* --- LOGICA RESPONSIVE --- */
-        /* zoom rimpicciolisce anche lo spazio occupato: la card non si deforma e non lascia vuoti */
+        /* la card (460x660 col padding) si rimpicciolisce con scale come nell'originale;
+           i margini negativi le fanno occupare solo lo spazio che si vede */
         .cardCar {
+            --s: min(var(--scale-w, 1), var(--scale-h, 1));
             flex-shrink: 0;
-            zoom: min(var(--zoom-w, 1), var(--zoom-h, 1));
+            transform: scale(var(--s));
+            margin: calc((var(--s) - 1) * 330px) calc((var(--s) - 1) * 230px);
         }
 
-        @media (max-width: 500px) {
-            :root { --zoom-w: 0.8; }
+        .cardCar:hover {
+            transform: scale(calc(var(--s) + 0.05)) rotateY(-5deg);
         }
 
-        @media (max-width: 420px) {
-            :root { --zoom-w: 0.72; }
+        /* in hover l'auto sporge a sinistra del centro di circa 380px con lo spostamento grande
+           e 295px x scala con quello piccolo: le soglie tengono l'auto dentro lo schermo */
+        @media (max-width: 800px) {
             .cardCar:hover .imgContainer {
                 transform: translateX(-30px) scale(1.2) translateZ(50px);
             }
         }
 
-        @media (max-width: 374px) {
-            :root { --zoom-w: 0.64; }
-        }
-
-        @media (max-width: 330px) {
-            :root { --zoom-w: 0.56; }
-        }
+        @media (max-width: 630px) { :root { --scale-w: 0.8; } }
+        @media (max-width: 512px) { :root { --scale-w: 0.72; } }
+        @media (max-width: 465px) { :root { --scale-w: 0.64; } }
+        @media (max-width: 418px) { :root { --scale-w: 0.58; } }
+        @media (max-width: 382px) { :root { --scale-w: 0.52; } }
+        @media (max-width: 347px) { :root { --scale-w: 0.46; } }
+        @media (max-width: 311px) { :root { --scale-w: 0.4; } }
 
         @media (max-height: 600px) {
-            html:not(.is-embed) { --zoom-h: 0.7; }
+            html:not(.is-embed) { --scale-h: 0.7; }
         }
