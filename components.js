@@ -7,4 +7,11 @@ window.COMPONENTS = [
     path: 'cards/cars-card/',
     height: 740,
   },
+  {
+    name: 'Kraft Notebook',
+    category: 'Notebook',
+    description: "Quaderno con copertina in cartoncino: etichetta scritta a penna, foto fissate con lo scotch che si sollevano al passaggio del mouse, adesivi e un elastico da tirare. Con un clic la copertina si apre sulla prima pagina di appunti.",
+    path: 'notebooks/kraft-notebook/',
+    height: 866,
+  },
 ];
