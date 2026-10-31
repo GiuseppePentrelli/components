@@ -40,7 +40,7 @@
         </div>
         <p class="description"></p>
         <div class="actions">
-          <a class="button open" target="_blank" rel="noopener">Apri</a>
+          <a class="button open">Apri</a>
           <a class="button code" target="_blank" rel="noopener">Codice</a>
           <button class="button copy" type="button">Copia iframe</button>
         </div>
@@ -51,6 +51,27 @@
       </div>
     </article>
   </template>
+
+  <dialog class="detail" id="detail" aria-labelledby="detail-title">
+    <button class="detail__close" type="button">← Tutti i componenti</button>
+    <div class="detail__layout">
+      <div class="detail__stage"></div>
+      <div class="detail__text">
+        <p class="detail__kicker reveal" style="--i: 0"></p>
+        <h2 class="detail__title reveal" id="detail-title" style="--i: 1"></h2>
+        <svg class="detail__mark" style="--i: 2" viewBox="0 0 240 14" preserveAspectRatio="none" aria-hidden="true">
+          <path pathLength="1" />
+        </svg>
+        <div class="detail__body"></div>
+        <ul class="detail__features"></ul>
+        <div class="detail__actions">
+          <a class="detail__link detail__page" target="_blank" rel="noopener">Pagina intera ↗</a>
+          <a class="detail__link detail__code" target="_blank" rel="noopener">Codice su GitHub ↗</a>
+          <button class="detail__link detail__copy" type="button">Copia iframe</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
 
   <footer class="footer">
     <p>Fatto da Giuseppe Pentrelli · <a href="https://github.com/GiuseppePentrelli/components">il codice su GitHub</a></p>

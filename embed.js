@@ -9,6 +9,14 @@
   document.body.style.overflow = 'hidden';
   document.body.style.minHeight = '0';
 
+  // Con ?trasparente la pagina lascia vedere lo sfondo di chi la carica, come fa il dettaglio della vetrina.
+  // Lo schema di colori deve coincidere con quello della vetrina, altrimenti il browser dipinge un fondo opaco.
+  if (new URLSearchParams(location.search).has('trasparente')) {
+    root.style.colorScheme = 'dark';
+    root.style.background = 'transparent';
+    document.body.style.background = 'transparent';
+  }
+
   const report = () => {
     const height = Math.ceil(root.getBoundingClientRect().height);
     window.parent.postMessage({ type: 'component:height', height }, '*');

@@ -154,11 +154,13 @@ h1 {
   transform-origin: 0 0;
 }
 
+/* Testo dei riquadri al 75%: le misure sono in em, così testo, spazi e bottoni scalano insieme. */
 .info {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.25rem 1.25rem 1.5rem;
+  gap: 0.75em;
+  padding: 1.25em 1.25em 1.5em;
+  font-size: 0.75rem;
 }
 
 .heading {
@@ -166,40 +168,46 @@ h1 {
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.5em;
 }
 
 .name {
-  font-size: 1.4rem;
+  font-size: 1.4em;
 }
 
 .category {
-  padding: 0.15rem 0.6rem;
+  padding: 0.15em 0.6em;
   border-radius: 999px;
   background: rgba(217, 166, 72, 0.15);
   color: var(--space-yellow);
-  font-size: 0.8rem;
+  font-size: 0.8em;
 }
 
+/* La descrizione completa è nel dettaglio: qui bastano tre righe. */
 .description {
+  display: -webkit-box;
   margin: 0;
+  overflow: hidden;
   color: var(--muted);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.5em;
 }
 
 .button {
-  padding: 0.5rem 1rem;
+  padding: 0.5em 1em;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 0.625em;
   background: rgba(55, 71, 79, 0.35);
   color: var(--space-white);
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 0.9em;
   text-decoration: none;
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
@@ -212,17 +220,17 @@ h1 {
 
 .snippet summary {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.85em;
   cursor: pointer;
 }
 
 .snippet pre {
-  margin: 0.5rem 0 0;
-  padding: 0.75rem;
+  margin: 0.5em 0 0;
+  padding: 0.75em;
   overflow-x: auto;
-  border-radius: 10px;
+  border-radius: 0.625em;
   background: var(--space-deep);
-  font-size: 0.8rem;
+  font-size: 0.8em;
 }
 
 .footer {
@@ -230,6 +238,234 @@ h1 {
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+/* Dettaglio di un componente: a tutto schermo, con lo sfondo, i colori e i font del componente.
+   Il testo sta direttamente sullo sfondo ed entra un pezzo alla volta. */
+body:has(.detail[open]) {
+  overflow: hidden;
+}
+
+.detail {
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --enter-x: 2.5rem;
+  --enter-y: 0rem;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  border: 0;
+  background: var(--d-bg);
+  color: var(--d-text);
+  font-family: var(--d-body-font);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.detail.is-in {
+  opacity: 1;
+}
+
+.detail::backdrop {
+  background: rgb(0 0 0 / 70%);
+}
+
+.detail :focus-visible {
+  outline-color: var(--d-accent);
+}
+
+.detail__close {
+  position: absolute;
+  top: 1.25rem;
+  left: max(1rem, (100% - 1200px) / 2);
+  z-index: 1;
+  padding: 0.4rem 0;
+  border: 0;
+  background: none;
+  color: var(--d-muted);
+  font: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.detail__close:hover {
+  color: var(--d-accent);
+}
+
+.detail__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem 4rem;
+  width: min(1200px, 100% - 2rem);
+  min-height: 100%;
+  margin-inline: auto;
+  padding-block: 4rem 3rem;
+}
+
+/* Il componente è caricato senza sfondo (?trasparente): sta direttamente su quello del dettaglio. */
+.detail__stage {
+  opacity: 0;
+  scale: 0.96;
+  transition: opacity 0.6s ease, scale 0.9s var(--ease);
+}
+
+.detail.is-in .detail__stage {
+  opacity: 1;
+  scale: 1;
+}
+
+.detail__frame {
+  display: block;
+  width: 100%;
+  height: var(--frame-height, 600px);
+  border: 0;
+}
+
+.detail__text {
+  max-width: 34rem;
+}
+
+.reveal {
+  opacity: 0;
+  translate: var(--enter-x) var(--enter-y);
+  transition:
+    opacity 0.7s ease,
+    translate 0.9s var(--ease);
+  transition-delay: calc(0.25s + var(--i, 0) * 0.08s);
+}
+
+.detail.is-in .reveal {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.detail__kicker {
+  margin: 0 0 1rem;
+  color: var(--d-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.detail__title {
+  margin: 0;
+  color: var(--d-title);
+  font-family: var(--d-title-font);
+  font-size: clamp(2.75rem, 6vw, 4.75rem);
+  font-style: var(--d-title-style);
+  font-weight: 700;
+  line-height: 1.02;
+}
+
+.detail__mark {
+  display: block;
+  width: min(100%, 15rem);
+  height: 0.9rem;
+  margin: 0.9rem 0 1.75rem;
+  overflow: visible;
+}
+
+.detail__mark path {
+  fill: none;
+  stroke: var(--d-accent);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-linecap: round;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  transition: stroke-dashoffset 1s var(--ease) 0.41s;
+}
+
+.detail[data-mark="scribble"] .detail__mark path {
+  stroke-width: 5;
+  opacity: 0.85;
+}
+
+.detail.is-in .detail__mark path {
+  stroke-dashoffset: 0;
+}
+
+.detail__body p {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.detail__features {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.detail__features li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: var(--d-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.detail__features li::before {
+  content: "";
+  position: absolute;
+  top: 0.75em;
+  left: 0;
+  width: 0.85rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--d-accent);
+}
+
+.detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.75rem;
+  margin-top: 2.25rem;
+}
+
+.detail__link {
+  padding: 0 0 0.25rem;
+  border: 0;
+  border-bottom: 1px solid var(--d-accent);
+  background: none;
+  color: var(--d-title);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.detail__link:hover {
+  color: var(--d-accent);
+}
+
+/* Sui telefoni il testo va sotto il componente ed entra dal basso. */
+@media (max-width: 55.99rem) {
+  .detail {
+    --enter-x: 0rem;
+    --enter-y: 1.75rem;
+  }
+
+  .detail__layout {
+    align-items: start;
+  }
+}
+
+@media (min-width: 56rem) {
+  .detail__layout {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

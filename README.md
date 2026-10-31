@@ -13,13 +13,13 @@ Ogni componente ha una pagina sua, che si apre da sola o si carica in un iframe:
         title="Cars Card" loading="lazy" style="border:0; width:100%; height:740px"></iframe>
 ```
 
-Dentro un iframe la pagina del componente non scorre mai, perché `embed.js` mette `overflow: hidden` su `html` e `body`, e manda alla pagina che la carica un messaggio `{ type: 'component:height', height }` con l'altezza che le serve. Chi la carica può ascoltarlo e adattare l'iframe, come fa la vetrina in `app.js`.
+Dentro un iframe la pagina del componente non scorre mai, perché `embed.js` mette `overflow: hidden` su `html` e `body`, e manda alla pagina che la carica un messaggio `{ type: 'component:height', height }` con l'altezza che le serve. Chi la carica può ascoltarlo e adattare l'iframe, come fa la vetrina in `app.js`. Con `?trasparente` nell'indirizzo la pagina toglie il proprio sfondo e lascia vedere quello di chi la carica: lo usa il dettaglio della vetrina.
 
 ## Aggiungere un componente
 
 1. Crea la cartella `<categoria>/<nome>/` con `index.html`, `style.css` ed eventuali immagini in `media/`.
 2. In `index.html` includi `<script src="../../embed.js" defer></script>`.
-3. Aggiungi il componente in `components.js`.
+3. Aggiungi il componente in `components.js`: `description` è il testo breve del riquadro, `details`, `features` e `theme` riempiono e colorano la pagina di dettaglio che si apre con "Apri".
 4. Fai il push: GitHub Pages pubblica i file così come sono, senza build.
 
 Per provarlo in locale basta aprire `index.html` nel browser.
