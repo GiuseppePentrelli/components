@@ -117,7 +117,7 @@ h1 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr));
   gap: 1.5rem;
   padding-bottom: 3rem;
 }
@@ -135,15 +135,23 @@ h1 {
   display: none;
 }
 
+/* Le anteprime sono i componenti veri, disegnati al doppio della larghezza e ridotti in scala:
+   restano identici, soltanto più piccoli. */
 .preview {
+  --preview-scale: 0.5;
+  height: calc(var(--frame-height, 600px) * var(--preview-scale));
+  overflow: hidden;
   background: var(--space-deep);
   border-bottom: 1px solid var(--line);
 }
 
 .preview iframe {
   display: block;
-  width: 100%;
+  width: calc(100% / var(--preview-scale));
+  height: var(--frame-height, 600px);
   border: 0;
+  transform: scale(var(--preview-scale));
+  transform-origin: 0 0;
 }
 
 .info {

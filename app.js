@@ -14,6 +14,11 @@ function iframeSnippet(component) {
   return `<iframe src="${absoluteUrl(component.path)}"\n        title="${component.name}" loading="lazy" style="border:0; width:100%; height:${component.height}px"></iframe>`;
 }
 
+// Il componente si disegna alla sua altezza piena; l'anteprima la riduce in scala con il CSS.
+function setFrameHeight(frame, height) {
+  frame.parentElement.style.setProperty('--frame-height', `${height}px`);
+}
+
 function renderTile(component) {
   const tile = template.content.firstElementChild.cloneNode(true);
   tile.dataset.category = component.category;
@@ -21,7 +26,7 @@ function renderTile(component) {
   const frame = tile.querySelector('iframe');
   frame.src = component.path;
   frame.title = component.name;
-  frame.style.height = `${component.height}px`;
+  setFrameHeight(frame, component.height);
 
   tile.querySelector('.name').textContent = component.name;
   tile.querySelector('.category').textContent = component.category;
@@ -69,7 +74,7 @@ function renderFilters() {
 window.addEventListener('message', (event) => {
   if (event.data?.type !== 'component:height') return;
   for (const frame of grid.querySelectorAll('iframe')) {
-    if (frame.contentWindow === event.source) frame.style.height = `${event.data.height}px`;
+    if (frame.contentWindow === event.source) setFrameHeight(frame, event.data.height);
   }
 });
 
