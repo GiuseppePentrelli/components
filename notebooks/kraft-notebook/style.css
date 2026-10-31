@@ -90,9 +90,9 @@ body {
 .stage {
   display: grid;
   justify-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   width: 100%;
-  padding: 4rem 1rem 2.5rem;
+  padding: 3rem 1rem 1.5rem;
   overflow-x: clip;
 }
 
@@ -131,8 +131,8 @@ body {
   --u: 1cqw;
   position: relative;
   container-type: inline-size;
-  width: min(32rem, 100%);
-  width: round(down, min(32rem, 100%), 2px);
+  width: min(22rem, 100%);
+  width: round(down, min(22rem, 100%), 2px);
   aspect-ratio: 3 / 4;
 
   /* Aperto, la doppia pagina resta al centro e rimpicciolisce quanto serve per starci tutta. */
