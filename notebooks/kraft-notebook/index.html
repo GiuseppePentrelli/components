@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kraft Notebook</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <script src="../../embed.js" defer></script>
+</head>
+<body>
+  <main class="stage">
+    <div class="notebook">
+      <div class="notebook__body">
+        <span class="notebook__pages" aria-hidden="true"></span>
+
+        <div class="notebook__next-page" aria-hidden="true">
+          <div class="page"></div>
+          <svg class="notes" viewBox="0 0 480 640" preserveAspectRatio="none">
+            <defs>
+              <filter id="notes-hand" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="7" />
+                <feDisplacementMap in="SourceGraphic" scale="3.2" />
+              </filter>
+            </defs>
+
+            <g filter="url(#notes-hand)">
+              <path class="notes__hl notes__hl--yellow" d="M86 44l236-4 2 22-238 3z" />
+              <path class="notes__hl notes__hl--green" d="M86 142l152-2 1 15-153 2z" />
+              <path class="notes__hl notes__hl--green" d="M98 280l146-2 1 27-147 2z" />
+              <path class="notes__hl notes__hl--pink" d="M98 434l146-2 1 27-147 2z" />
+              <path class="notes__hl notes__hl--blue" d="M86 584l168-3 1 17-169 2z" />
+              <path class="notes__hl notes__hl--orange" d="M256 300l120-2 1 13-121 2z" />
+            </g>
+
+            <g class="notes__pencil" filter="url(#notes-hand)">
+              <path d="M88 70q30 5 58-1t60 2 58-2 62 1" />
+              <rect x="98" y="180" width="146" height="28" rx="4" />
+              <rect x="98" y="230" width="146" height="28" rx="4" />
+              <rect x="98" y="280" width="146" height="28" rx="4" />
+              <rect class="notes__dashed" x="98" y="332" width="146" height="28" rx="13" />
+              <rect x="98" y="382" width="146" height="28" rx="4" />
+              <rect x="98" y="432" width="146" height="28" rx="4" />
+              <path d="M171 208v20m-4-6l4 6 4-6M171 258v20m-4-6l4 6 4-6M171 308v22m-4-6l4 6 4-6M171 360v20m-4-6l4 6 4-6M171 410v20m-4-6l4 6 4-6" />
+              <path d="M98 396q-22-2-21-26t20-24m-7-4l7 4-5 7" />
+              <path d="M246 244h8M246 294h8M246 446h8" />
+              <path d="M86 524h196M86 544h196M86 564h196M170 508v60" />
+              <path d="M392 196q10-12 20-2t-2 20-24-2-2-28 30-12 28 20-18 34" />
+              <path d="M408 548l5 13 14 1-11 9 4 14-12-8-12 8 4-14-11-9 14-1z" />
+              <path d="M376 388l26-10 26 10v30l-26 10-26-10zM376 388l26 10 26-10M402 398v30" />
+              <path d="M380 394l18 7M380 402l18 7M380 410l18 7M380 418l14 5" />
+              <path d="M300 590q26-4 54 2" />
+              <path d="M88 604q40 4 82 0t82 1M90 609q40 3 80 0" />
+              <path d="M430 96q8 20-2 40m-6-8l6 8 7-7" />
+            </g>
+
+            <g class="notes__red" filter="url(#notes-hand)">
+              <ellipse cx="362" cy="124" rx="48" ry="19" transform="rotate(-6 362 124)" />
+              <path d="M252 128l10 10m0-10l-10 10" />
+            </g>
+            <path class="notes__green" filter="url(#notes-hand)" d="M246 149l5 6 10-13" />
+
+            <g class="notes__text">
+              <text class="notes__title" x="92" y="60" transform="rotate(-1 92 60)">Lorem ipsum — dolor sit</text>
+              <text x="88" y="96">lorem ipsum = dolor sit amet</text>
+              <text x="88" y="114">consectetur adipiscing elit</text>
+              <text x="88" y="136">sed do → eiusmod</text>
+              <text x="88" y="154">ut labore → et dolore</text>
+
+              <text class="notes__node" x="171" y="199">lorem</text>
+              <text class="notes__node" x="171" y="249">ipsum dolor</text>
+              <text class="notes__node" x="171" y="299">sit amet</text>
+              <text class="notes__node" x="171" y="351">[consectetur]</text>
+              <text class="notes__node" x="171" y="401">adipiscing</text>
+              <text class="notes__node" x="171" y="451">elit sed</text>
+
+              <text class="notes__small" x="258" y="248">magna aliqua ut enim</text>
+              <text class="notes__small notes__text--blue" x="258" y="294">minim veniam →</text>
+              <text class="notes__small notes__text--blue" x="258" y="310">quis nostrud</text>
+              <text class="notes__small notes__text--red" x="258" y="444">ullamco laboris,</text>
+              <text class="notes__small notes__text--red" x="258" y="460">nisi ut aliquip</text>
+
+              <text class="notes__small" x="322" y="98" transform="rotate(-4 322 98)">ex ea sempre</text>
+              <text class="notes__text--red notes__bold" x="330" y="130" transform="rotate(-6 330 130)">commodo !</text>
+              <text class="notes__small" x="322" y="160" transform="rotate(-3 322 160)">duis aute no</text>
+
+              <text class="notes__bold" x="88" y="502">irure o dolor in</text>
+              <text class="notes__question" x="296" y="512" transform="rotate(12 296 512)">?</text>
+              <text class="notes__question notes__question--small" x="330" y="494" transform="rotate(-9 330 494)">?</text>
+              <text class="notes__small" x="90" y="538">irure</text>
+              <text class="notes__small" x="176" y="538">reprehenderit, sì</text>
+              <text class="notes__small" x="90" y="558">dolor</text>
+              <text class="notes__small" x="176" y="558">in voluptate</text>
+
+              <text class="notes__text--blue notes__bold" x="90" y="597">velit esse cillum dolore</text>
+              <text class="notes__small" x="302" y="594">fugiat</text>
+            </g>
+          </svg>
+        </div>
+
+        <span class="notebook__shade" aria-hidden="true"></span>
+
+        <div class="notebook__leaf">
+          <div class="notebook__front">
+            <span class="notebook__spine" aria-hidden="true"></span>
+
+            <div class="label">
+              <h1>
+                <span class="label__row label__title">
+                  <span class="label__highlight"><span class="label__written">Quaderno</span></span>
+                </span>
+                <span class="label__row label__author">
+                  <span class="label__written label__written--second">di Nome Cognome</span>
+                </span>
+              </h1>
+              <p class="label__row label__occasion">Anno scolastico 2026–2027</p>
+            </div>
+
+            <figure class="taped-photo sketch" style="--tilt: -3deg; --tape-at: 40%; --tape-tilt: 5deg" data-nudge="150">
+              <span class="taped-photo__tape" aria-hidden="true"></span>
+              <img src="https://picsum.photos/seed/kraft-notebook-1/440/550" alt="Foto di esempio" width="440" height="550" decoding="async">
+            </figure>
+
+            <figure class="taped-photo photo" style="--tilt: 4deg; --tape-at: 38%; --tape-tilt: -8deg" data-nudge="200">
+              <span class="taped-photo__tape" aria-hidden="true"></span>
+              <img src="https://picsum.photos/seed/kraft-notebook-2/400/487" alt="Foto di esempio" width="400" height="487" decoding="async">
+            </figure>
+
+            <svg class="sticker sticker--round" viewBox="0 0 72 72" aria-hidden="true">
+              <defs>
+                <clipPath id="sticker-round-clip"><circle cx="36" cy="36" r="27" /></clipPath>
+              </defs>
+              <circle class="sticker__cut" cx="36" cy="36" r="34" />
+              <circle class="sticker__stitch" cx="36" cy="36" r="30" />
+              <image href="https://picsum.photos/seed/kraft-sticker-1/160/160" x="9" y="9" width="54" height="54" preserveAspectRatio="xMidYMid slice" clip-path="url(#sticker-round-clip)" />
+            </svg>
+
+            <svg class="sticker sticker--bubble" viewBox="0 0 170 130" aria-hidden="true">
+              <defs>
+                <path id="sticker-bubble-shape" d="M30 16h110a11 11 0 0 1 11 11v62a11 11 0 0 1-11 11H76l-16 14-2-14H30a11 11 0 0 1-11-11V27a11 11 0 0 1 11-11z" />
+                <clipPath id="sticker-bubble-clip"><use href="#sticker-bubble-shape" /></clipPath>
+              </defs>
+              <use class="sticker__die" href="#sticker-bubble-shape" />
+              <use class="sticker__die-stitch" href="#sticker-bubble-shape" />
+              <use class="sticker__die-cover" href="#sticker-bubble-shape" />
+              <image href="https://picsum.photos/seed/kraft-sticker-2/340/260" x="19" y="16" width="132" height="98" preserveAspectRatio="xMidYMid slice" clip-path="url(#sticker-bubble-clip)" />
+            </svg>
+
+            <svg class="sticker sticker--card" viewBox="0 0 196 132" aria-hidden="true">
+              <defs>
+                <clipPath id="sticker-card-clip"><rect x="20" y="18" width="156" height="96" rx="12" /></clipPath>
+              </defs>
+              <rect class="sticker__cut sticker__cut--outline" x="14" y="12" width="168" height="108" rx="18" />
+              <rect class="sticker__stitch" x="14" y="12" width="168" height="108" rx="18" />
+              <image href="https://picsum.photos/seed/kraft-sticker-3/390/240" x="20" y="18" width="156" height="96" preserveAspectRatio="xMidYMid slice" clip-path="url(#sticker-card-clip)" />
+            </svg>
+          </div>
+
+          <div class="notebook__inside" aria-hidden="true">
+            <svg class="inside" viewBox="0 0 448 640">
+              <g class="inside__print">
+                <text class="inside__title" x="224" y="62">Tavola delle scorciatoie</text>
+                <path class="inside__rule inside__rule--bold" d="M44 80h360" />
+                <path class="inside__rule" d="M44 85h360" />
+                <path class="inside__rule" d="M44 104h360M44 156h360M44 208h360M44 260h360M44 312h360M44 364h360M44 416h360M44 104v312M224 104v312M404 104v312" />
+                <rect class="inside__key" x="56" y="112" width="37.6" height="17" rx="3.5" />
+                <text class="inside__key-text" x="74.8" y="124.5">Ctrl</text>
+                <text class="inside__plus" x="99.6" y="124.5">+</text>
+                <rect class="inside__key" x="105.6" y="112" width="18.4" height="17" rx="3.5" />
+                <text class="inside__key-text" x="114.8" y="124.5">C</text>
+                <text class="inside__meaning" x="56" y="145">copia</text>
+                <rect class="inside__key" x="56" y="164" width="37.6" height="17" rx="3.5" />
+                <text class="inside__key-text" x="74.8" y="176.5">Ctrl</text>
+                <text class="inside__plus" x="99.6" y="176.5">+</text>
+                <rect class="inside__key" x="105.6" y="164" width="18.4" height="17" rx="3.5" />
+                <text class="inside__key-text" x="114.8" y="176.5">V</text>
+                <text class="inside__meaning" x="56" y="197">incolla</text>
+                <rect class="inside__key" x="56" y="216" width="37.6" height="17" rx="3.5" />
+                <text class="inside__key-text" x="74.8" y="228.5">Ctrl</text>
+                <text class="inside__plus" x="99.6" y="228.5">+</text>
+                <rect class="inside__key" x="105.6" y="216" width="18.4" height="17" rx="3.5" />
+                <text class="inside__key-text" x="114.8" y="228.5">Z</text>
+                <text class="inside__meaning" x="56" y="249">annulla</text>
+                <rect class="inside__key" x="56" y="268" width="37.6" height="17" rx="3.5" />
+                <text class="inside__key-text" x="74.8" y="280.5">Ctrl</text>
+                <text class="inside__plus" x="99.6" y="280.5">+</text>
+                <rect class="inside__key" x="105.6" y="268" width="18.4" height="17" rx="3.5" />
+                <text class="inside__key-text" x="114.8" y="280.5">S</text>
+                <text class="inside__meaning" x="56" y="301">salva</text>
+                <rect class="inside__key" x="56" y="320" width="37.6" height="17" rx="3.5" />
+                <text class="inside__key-text" x="74.8" y="332.5">Ctrl</text>
+                <text class="inside__plus" x="99.6" y="332.5">+</text>
+                <rect class="inside__key" x="105.6" y="320" width="18.4" height="17" rx="3.5" />
+                <text class="inside__key-text" x="114.8" y="332.5">F</text>
+                <text class="inside__meaning" x="56" y="353">cerca nella pagina</text>
+                <rect class="inside__key" x="56" y="372" width="37.6" height="17" rx="3.5" />
+                <text class="inside__key-text" x="74.8" y="384.5">Ctrl</text>
+                <text class="inside__plus" x="99.6" y="384.5">+</text>
+                <rect class="inside__key" x="105.6" y="372" width="18.4" height="17" rx="3.5" />
+                <text class="inside__key-text" x="114.8" y="384.5">A</text>
+                <text class="inside__meaning" x="56" y="405">seleziona tutto</text>
+                <rect class="inside__key" x="236" y="112" width="24.8" height="17" rx="3.5" />
+                <text class="inside__key-text" x="248.4" y="124.5">F5</text>
+                <text class="inside__meaning" x="236" y="145">ricarica la pagina</text>
+                <rect class="inside__key" x="236" y="164" width="37.6" height="17" rx="3.5" />
+                <text class="inside__key-text" x="254.8" y="176.5">Ctrl</text>
+                <text class="inside__plus" x="279.6" y="176.5">+</text>
+                <rect class="inside__key" x="285.6" y="164" width="44.0" height="17" rx="3.5" />
+                <text class="inside__key-text" x="307.6" y="176.5">Shift</text>
+                <text class="inside__plus" x="335.6" y="176.5">+</text>
+                <rect class="inside__key" x="341.6" y="164" width="18.4" height="17" rx="3.5" />
+                <text class="inside__key-text" x="350.8" y="176.5">R</text>
+                <text class="inside__meaning" x="236" y="197">ricarica senza cache</text>
+                <rect class="inside__key" x="236" y="216" width="31.2" height="17" rx="3.5" />
+                <text class="inside__key-text" x="251.6" y="228.5">F12</text>
+                <text class="inside__meaning" x="236" y="249">strumenti di sviluppo</text>
+                <rect class="inside__key" x="236" y="268" width="37.6" height="17" rx="3.5" />
+                <text class="inside__key-text" x="254.8" y="280.5">Ctrl</text>
+                <text class="inside__plus" x="279.6" y="280.5">+</text>
+                <rect class="inside__key" x="285.6" y="268" width="18.4" height="17" rx="3.5" />
+                <text class="inside__key-text" x="294.8" y="280.5">/</text>
+                <text class="inside__meaning" x="236" y="301">commenta la riga</text>
+                <rect class="inside__key" x="236" y="320" width="31.2" height="17" rx="3.5" />
+                <text class="inside__key-text" x="251.6" y="332.5">Alt</text>
+                <text class="inside__plus" x="273.2" y="332.5">+</text>
+                <rect class="inside__key" x="279.2" y="320" width="31.2" height="17" rx="3.5" />
+                <text class="inside__key-text" x="294.8" y="332.5">Tab</text>
+                <text class="inside__meaning" x="236" y="353">cambia finestra</text>
+                <rect class="inside__key" x="236" y="372" width="37.6" height="17" rx="3.5" />
+                <text class="inside__key-text" x="254.8" y="384.5">Ctrl</text>
+                <text class="inside__plus" x="279.6" y="384.5">+</text>
+                <rect class="inside__key" x="285.6" y="372" width="44.0" height="17" rx="3.5" />
+                <text class="inside__key-text" x="307.6" y="384.5">Shift</text>
+                <text class="inside__plus" x="335.6" y="384.5">+</text>
+                <rect class="inside__key" x="341.6" y="372" width="18.4" height="17" rx="3.5" />
+                <text class="inside__key-text" x="350.8" y="384.5">P</text>
+                <text class="inside__meaning" x="236" y="405">tutti i comandi dell'editor</text>
+              </g>
+
+              <ellipse class="inside__pen" cx="88" cy="276" rx="42" ry="15" transform="rotate(-5 88 276)" />
+              <path class="inside__pencil" d="M138 288q14 6 30 0M138 293q14 5 28 1" />
+              <text class="inside__note" x="136" y="284" transform="rotate(-4 136 284)">sempre.</text>
+
+              <path class="inside__slot" d="M16 494L432 444v10L16 504z" />
+              <g transform="rotate(6 325 470)">
+                <g class="inside__paper" data-spring>
+                  <rect class="inside__sheet" x="252" y="388" width="150" height="170" />
+                  <path class="inside__pencil" d="M262 397h130v62H262zM277 410h100v36H277zM293 421h68v14h-68z" />
+                  <text class="inside__scrap" x="266" y="407">margin</text>
+                  <text class="inside__scrap" x="281" y="419">padding</text>
+                  <text class="inside__scrap inside__scrap--center" x="327" y="431.500">content</text>
+                </g>
+              </g>
+              <g transform="rotate(-7 118 440)">
+                <g class="inside__paper" data-spring>
+                  <rect class="inside__postit" x="70" y="386" width="98" height="110" />
+                  <path class="inside__postit-top" d="M70 386h98v13H70z" />
+                  <text class="inside__scrap inside__scrap--bold" x="79" y="413">da fare</text>
+                  <path class="inside__pencil" d="M79 421h7v7h-7zM79 436h7v7h-7zM79 451h7v7h-7zM78 416q14 3 30 0" />
+                  <text class="inside__scrap" x="91" y="428">lorem ipsum</text>
+                  <text class="inside__scrap" x="91" y="443">dolor sit</text>
+                  <text class="inside__scrap" x="91" y="458">amet</text>
+                </g>
+              </g>
+              <g transform="rotate(5 212 452)">
+                <g class="inside__paper" data-spring>
+                  <rect class="inside__postit inside__postit--pink" x="172" y="412" width="82" height="96" />
+                  <path class="inside__postit-top" d="M172 412h82v11h-82z" />
+                  <text class="inside__scrap inside__scrap--bold" x="181" y="440">Lorem</text>
+                  <text class="inside__scrap inside__scrap--red" x="181" y="455">ipsum, sempre</text>
+                  <path class="inside__pen" d="M179 459q18 3 40-1" />
+                </g>
+              </g>
+
+              <path class="inside__pocket" d="M16 502L432 452v162a10 10 0 0 1-10 10H26a10 10 0 0 1-10-10z" />
+              <path class="inside__stitch" d="M24 510L424 462" />
+              <g class="inside__print inside__print--pocket">
+                <text class="inside__imprint" x="224" y="546">80 fogli · rigo 28 px</text>
+                <text class="inside__imprint" x="224" y="562">carta riciclata al 100%</text>
+                <path class="inside__rule" d="M44 586h360M44 586v12M53 586v5M62 586v5M71 586v5M80 586v5M89 586v8M98 586v5M107 586v5M116 586v5M125 586v5M134 586v12M143 586v5M152 586v5M161 586v5M170 586v5M179 586v8M188 586v5M197 586v5M206 586v5M215 586v5M224 586v12M233 586v5M242 586v5M251 586v5M260 586v5M269 586v8M278 586v5M287 586v5M296 586v5M305 586v5M314 586v12M323 586v5M332 586v5M341 586v5M350 586v5M359 586v8M368 586v5M377 586v5M386 586v5M395 586v5M404 586v12" />
+                <text class="inside__ruler-number" x="44" y="610">0</text>
+                <text class="inside__ruler-number" x="134" y="610">1</text>
+                <text class="inside__ruler-number" x="224" y="610">2</text>
+                <text class="inside__ruler-number" x="314" y="610">3</text>
+                <text class="inside__ruler-number" x="404" y="610">4</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="notebook__band">
+          <svg class="elastic" viewBox="0 0 150 520" preserveAspectRatio="none" aria-hidden="true">
+            <path class="elastic__shadow" transform="translate(2,3)" />
+            <path class="elastic__band" />
+            <path class="elastic__light" transform="translate(-3,0)" />
+            <path class="elastic__grip" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <button class="toggle" type="button">Apri il quaderno</button>
+  </main>
+</body>
+</html>
