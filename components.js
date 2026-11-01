@@ -67,4 +67,33 @@ window.COMPONENTS = [
       ],
     },
   },
+  {
+    name: 'Open World Minimap',
+    category: 'Mappa',
+    description: "La minimappa nell'angolo dello schermo, come nei giochi open world: strade, luoghi, la freccia di chi gioca e la linea del navigatore fino alla destinazione.",
+    details: [
+      "Una minimappa da videogioco open world, disegnata da zero in SVG: una città stilizzata, con la statale, le strade, i parchi e gli isolati, tre luoghi segnati da un'icona e la freccia di chi gioca, davanti a casa.",
+      "La linea viola del navigatore porta dalla casa alla destinazione, cerchiata dello stesso colore; sotto, cinque stelle dicono il livello di ricerca. Nata come omaggio nel laboratorio del portfolio.",
+    ],
+    features: [
+      'Disegnata a mano in SVG, senza immagini',
+      'Angoli arrotondati con clipPath e cornice chiara',
+      'Linea del navigatore con il bagliore',
+      'Livello di ricerca a stelle con clip-path',
+      'Misure in em: si ridimensiona tutta insieme',
+      'Un solo HTML e un CSS, senza JavaScript',
+    ],
+    path: 'maps/open-world-minimap/',
+    height: 520,
+    theme: {
+      background: 'radial-gradient(circle at center, #1d2630 0%, #0b0f13 100%) #11161b',
+      title: '#f4f1ea',
+      text: '#f4f1ea',
+      muted: '#8d99a3',
+      accent: '#d64cd8',
+      titleFont: '"Segoe UI", system-ui, sans-serif',
+      bodyFont: '"Segoe UI", system-ui, sans-serif',
+      mark: 'line',
+    },
+  },
 ];

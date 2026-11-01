@@ -1,0 +1,156 @@
+:root {
+  color-scheme: dark;
+
+  --land: #25303a;
+  --park: #2f4d3a;
+  --blocks: #2d3945;
+  --highway: #c9a24a;
+  --road: #8d99a3;
+  --route: #d64cd8;
+  --pin: #11161b;
+  --mark: #f4f1ea;
+  --home: #6ccf7a;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%) #0f0f0f;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* Dentro un iframe la pagina è alta quanto la mappa, con un po' d'aria per l'ombra. */
+html.is-embed body {
+  padding-block: 32px;
+}
+
+.stage {
+  padding: 24px;
+}
+
+/* La mappa misura tutto in em: cambiando font-size si ridimensiona tutta insieme. */
+.minimap {
+  display: grid;
+  gap: 0.5em;
+  width: 15em;
+  margin: 0;
+  font-size: clamp(14px, 6vw, 24px);
+}
+
+.minimap__map {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0.4em 0.8em rgb(0 0 0 / 60%));
+}
+
+.minimap__land {
+  fill: var(--land);
+}
+
+.minimap__park {
+  fill: var(--park);
+}
+
+.minimap__blocks {
+  fill: var(--blocks);
+}
+
+.minimap__highway {
+  fill: none;
+  stroke: var(--highway);
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+
+.minimap__road {
+  fill: none;
+  stroke: var(--road);
+  stroke-linecap: round;
+  stroke-width: 2.2;
+}
+
+.minimap__route {
+  fill: none;
+  stroke: var(--route);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 1.5px var(--route));
+}
+
+.minimap__pin {
+  fill: var(--pin);
+  stroke: var(--mark);
+  stroke-width: 1.4;
+}
+
+.minimap__pin--target {
+  stroke: var(--route);
+  stroke-width: 1.8;
+}
+
+.minimap__glyph {
+  fill: none;
+  stroke: var(--mark);
+  stroke-linecap: round;
+  stroke-width: 1.1;
+}
+
+.minimap__fill {
+  fill: var(--mark);
+}
+
+.minimap__home {
+  fill: var(--home);
+  stroke: var(--pin);
+  stroke-width: 1;
+}
+
+.minimap__player {
+  fill: #fff;
+  stroke: var(--pin);
+  stroke-linejoin: round;
+  stroke-width: 1;
+}
+
+.minimap__frame {
+  fill: none;
+  stroke: rgb(255 255 255 / 85%);
+  stroke-width: 2;
+}
+
+.minimap__north {
+  fill: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+/* Il livello di ricerca: tre stelle accese su cinque. */
+.minimap__stars {
+  display: flex;
+  gap: 0.25em;
+  justify-content: center;
+  margin: 0;
+}
+
+.minimap__star {
+  width: 1.5em;
+  height: 1.5em;
+  background: rgb(255 255 255 / 22%);
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.minimap__star--on {
+  background: var(--mark);
+  filter: drop-shadow(0 0 0.3em rgb(255 255 255 / 70%));
+}
