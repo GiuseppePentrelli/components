@@ -147,7 +147,6 @@ html.is-embed body {
 .map__ground .route {
   fill: none;
   stroke: var(--route);
-  stroke-dasharray: 1 1;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 3;
@@ -167,7 +166,7 @@ html.is-embed body {
   stroke-width: 1;
   transform-box: fill-box;
   transform-origin: center;
-  transition: rotate 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: rotate 180ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* I luoghi: bottoni tondi sull'incrocio, della stessa misura a qualsiasi zoom. Il nome compare
@@ -231,6 +230,25 @@ html.is-embed body {
   top: calc(100% + 6px);
   bottom: auto;
   translate: -50% -4px;
+}
+
+.place--label-left .place__label {
+  right: 0;
+  left: auto;
+  translate: 0 4px;
+}
+
+.place--label-right .place__label {
+  left: 0;
+  translate: 0 4px;
+}
+
+.place--label-below:is(.place--label-left, .place--label-right) .place__label {
+  translate: 0 -4px;
+}
+
+.place:is(.place--label-left, .place--label-right):is(:hover, :focus-visible, [aria-pressed="true"]) .place__label {
+  translate: 0 0;
 }
 
 .place:hover .place__label,

@@ -119,7 +119,7 @@ function drawGround() {
   ground.append(svg('path', { class: 'highway-casing', d: 'M-8 30C30 36 70 52 96 70S140 104 170 112' }));
   ground.append(svg('path', { class: 'highway', d: 'M-8 30C30 36 70 52 96 70S140 104 170 112' }));
 
-  ground.append(svg('polyline', { class: 'route', points: '', pathLength: 1 }));
+  ground.append(svg('polyline', { class: 'route', points: '' }));
 
   const [hx, hy] = NODES[HOME];
   ground.append(svg('path', { class: 'home', d: `M${hx - 13} ${hy + 9} ${hx - 8} ${hy + 4} ${hx - 3} ${hy + 9}V${hy + 14}H${hx - 13}Z` }));
@@ -133,8 +133,12 @@ function drawPlaces() {
     const [x, y] = NODES[place.node];
     const button = document.createElement('button');
     button.type = 'button';
-    // Vicino al bordo in alto il nome va sotto il luogo, o il riquadro lo taglierebbe.
-    button.className = y < 32 ? 'place place--label-below' : 'place';
+    // Vicino ai bordi il nome va sotto il luogo (in alto) o si allinea verso l'interno (a destra e a
+    // sinistra), o il riquadro lo taglierebbe.
+    button.className = 'place';
+    if (y < 32) button.classList.add('place--label-below');
+    if (x > 120) button.classList.add('place--label-left');
+    if (x < 40) button.classList.add('place--label-right');
     button.dataset.place = place.id;
     button.setAttribute('aria-pressed', 'false');
     button.style.left = `${(x / 160) * 100}%`;
@@ -145,27 +149,113 @@ function drawPlaces() {
   }
 }
 
+// La freccia si ferma a STOP unità dal centro del luogo, così resta visibile davanti al bottone, e
+// corre a SPEED unità al secondo, fra MIN_MS e MAX_MS di viaggio.
+const STOP = 12;
+const SPEED = 70;
+const MIN_MS = 500;
+const MAX_MS = 2600;
+
+// Dove si trova la freccia: un punto sulla strada fra gli incroci a e b (uguali se è su un
+// incrocio). All'inizio è a casa. Non si chiama location, che nel browser è già window.location.
+let spot = { a: HOME, b: HOME, pos: [...NODES[HOME]] };
 let heading = 0;
+let frame = 0;
 
-// Scelto un luogo, il navigatore disegna il percorso da casa e la freccia si gira verso la prima
-// strada da prendere. La rotazione fa sempre il giro più corto.
-function choose(place) {
-  const { path, length } = shortestPath(HOME, place.node);
-  const route = ground.querySelector('.route');
-  route.setAttribute('points', points(path));
-  if (!reduceMotion.matches) {
-    route.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 700, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+const between = (p, q) => Math.hypot(q[0] - p[0], q[1] - p[1]);
+const format = list => list.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(' ');
+
+// Il percorso più breve da un punto di una strada: si prova a partire verso tutti e due gli incroci
+// della strada e si tiene il più corto. `ids` dice di quale incrocio è ogni punto, con null per la
+// partenza.
+function planFrom(from, target) {
+  const starts = from.a === from.b ? [from.a] : [from.a, from.b];
+  let best = null;
+  for (const start of starts) {
+    const { path, length } = shortestPath(start, target);
+    const lead = between(from.pos, NODES[start]);
+    if (!best || lead + length < best.length) best = { ids: [null, ...path], length: lead + length };
   }
+  return { ...best, points: best.ids.map((id, index) => (index === 0 ? from.pos : NODES[id])) };
+}
 
-  const [x0, y0] = NODES[path[0]];
-  const [x1, y1] = NODES[path[1]];
-  const target = (Math.atan2(y1 - y0, x1 - x0) * 180) / Math.PI + 90;
-  heading += ((target - heading + 540) % 360) - 180;
+// La freccia gira sempre dal lato più corto.
+function turnTowards(p, q) {
+  const angle = (Math.atan2(q[1] - p[1], q[0] - p[0]) * 180) / Math.PI + 90;
+  heading += ((((angle - heading) % 360) + 540) % 360) - 180;
   ground.querySelector('.player').style.rotate = `${heading}deg`;
+}
+
+function placePlayer(pos) {
+  ground.querySelector('.player').parentNode.setAttribute('transform', `translate(${pos[0].toFixed(2)} ${pos[1].toFixed(2)})`);
+}
+
+// Il percorso fermo, con movimento ridotto: la linea da dove si trova la freccia al luogo, e la
+// freccia girata verso la prima strada.
+function show(plan) {
+  ground.querySelector('.route').setAttribute('points', format(plan.points));
+  for (let i = 1; i < plan.points.length; i++) {
+    if (between(plan.points[i - 1], plan.points[i]) > 0.01) {
+      turnTowards(plan.points[i - 1], plan.points[i]);
+      break;
+    }
+  }
+}
+
+// Il viaggio: la freccia segue la strada fino a STOP unità dal luogo, girando a ogni incrocio, e la
+// linea del navigatore si accorcia davanti a lei. Un nuovo clic durante il viaggio riparte dal punto
+// in cui la freccia è arrivata.
+function drive(plan) {
+  const route = ground.querySelector('.route');
+  const target = plan.points.at(-1);
+  const before = plan.points.at(-2);
+  const last = between(before, target);
+  if (plan.points.length === 2 && last <= STOP + 0.5) {
+    route.setAttribute('points', format(plan.points));
+    return;
+  }
+  const stop = last > STOP ? [target[0] - ((target[0] - before[0]) * STOP) / last, target[1] - ((target[1] - before[1]) * STOP) / last] : before;
+  const path = [...plan.points.slice(0, -1), stop];
+  const lengths = [0];
+  for (let i = 1; i < path.length; i++) lengths.push(lengths[i - 1] + between(path[i - 1], path[i]));
+  const total = lengths.at(-1);
+  const duration = Math.min(MAX_MS, Math.max(MIN_MS, (total / SPEED) * 1000));
+  const origin = spot;
+  const started = performance.now();
+  let segment = -1;
+
+  function step(now) {
+    const t = Math.min(1, (now - started) / duration);
+    const eased = t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
+    const travelled = eased * total;
+    let i = 0;
+    while (i < path.length - 2 && lengths[i + 1] < travelled) i++;
+    const piece = lengths[i + 1] - lengths[i];
+    const k = piece > 0 ? (travelled - lengths[i]) / piece : 1;
+    const pos = [path[i][0] + (path[i + 1][0] - path[i][0]) * k, path[i][1] + (path[i + 1][1] - path[i][1]) * k];
+    if (i !== segment && piece > 0.01) {
+      segment = i;
+      turnTowards(path[i], path[i + 1]);
+    }
+    placePlayer(pos);
+    route.setAttribute('points', format([pos, ...path.slice(i + 1, -1), target]));
+    spot = plan.ids[i] === null ? { a: origin.a, b: origin.b, pos } : { a: plan.ids[i], b: plan.ids[i + 1], pos };
+    if (t < 1) frame = requestAnimationFrame(step);
+  }
+  frame = requestAnimationFrame(step);
+}
+
+// Scelto un luogo, il navigatore calcola il percorso da dove si trova la freccia e la freccia lo
+// percorre; con movimento ridotto resta ferma e si vede solo la linea.
+function choose(place) {
+  cancelAnimationFrame(frame);
+  const plan = planFrom(spot, place.node);
+  if (reduceMotion.matches) show(plan);
+  else drive(plan);
 
   for (const button of placesLayer.children) button.setAttribute('aria-pressed', String(button.dataset.place === place.id));
-  const meters = Math.round((length * METERS_PER_UNIT) / 10) * 10;
-  status.textContent = `Destinazione: ${place.name} · ${meters} m`;
+  const meters = Math.round((plan.length * METERS_PER_UNIT) / 10) * 10;
+  status.textContent = plan.length <= STOP + 1 ? `${place.name} · Sei già qui` : `Destinazione: ${place.name} · Percorso di ${meters} m`;
 }
 
 // Lo spostamento e lo zoom. Il mondo si sposta e si ingrandisce con una trasformazione; i luoghi

@@ -70,14 +70,14 @@ window.COMPONENTS = [
   {
     name: 'Open World Map',
     category: 'Mappa',
-    description: "La mappa interattiva di una città da videogioco: scegli un luogo e il navigatore traccia il percorso più breve da casa, poi trascina e ingrandisci.",
+    description: "La mappa interattiva di una città da videogioco: scegli un luogo e la freccia ci va seguendo le strade del percorso più breve. Si trascina e si ingrandisce.",
     details: [
-      "La mappa di una città da videogioco open world, disegnata da zero in SVG: isolati, parchi, un lago, la statale e quattro luoghi. Le strade sono una rete vera: scegliendo un luogo, il navigatore calcola il percorso più breve da casa (l'algoritmo di Dijkstra), lo disegna e dice quanti metri mancano, mentre la freccia si gira verso la prima strada da prendere.",
+      "La mappa di una città da videogioco open world, disegnata da zero in SVG: isolati, parchi, un lago, la statale e quattro luoghi. Le strade sono una rete vera: scegliendo un luogo, il navigatore calcola il percorso più breve da dove si trova la freccia (l'algoritmo di Dijkstra) e la freccia lo percorre, girando agli incroci, mentre la linea viola si accorcia davanti a lei. Si ferma davanti al luogo, e il viaggio dopo riparte da lì.",
       "La mappa si ingrandisce con i bottoni, con Ctrl e la rotella o con il pizzico del trackpad, e si trascina quando è ingrandita. Si usa tutta anche da tastiera: i luoghi sono bottoni veri, e sulla mappa le frecce la spostano, più e meno la ingrandiscono, zero la rimettono a posto.",
     ],
     features: [
       'Percorso più breve calcolato con Dijkstra sulla rete stradale',
-      'Linea del navigatore che si disegna e freccia che ruota',
+      'La freccia viaggia lungo le strade e riparte da dove è arrivata',
       'Zoom e trascinamento, con i luoghi sempre della stessa misura',
       'La rotella zooma solo con Ctrl: la pagina continua a scorrere',
       'Tutto usabile da tastiera, con i nomi letti dai lettori di schermo',
