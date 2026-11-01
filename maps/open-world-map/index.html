@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open World Map</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <script src="../../embed.js" defer></script>
+</head>
+<body>
+  <main class="stage">
+    <!-- La mappa interattiva di una città da videogioco open world. Le strade sono una rete vera:
+         scegliendo un luogo, il navigatore calcola il percorso più breve da casa e lo disegna. La
+         mappa si trascina e si ingrandisce, anche da tastiera. Lo script disegna tutto a partire dai
+         dati in cima a script.js. -->
+    <section class="map" aria-labelledby="map-title">
+      <h1 id="map-title" class="map__hidden">Mappa della città</h1>
+
+      <div
+        class="map__viewport"
+        tabindex="0"
+        role="group"
+        aria-label="Mappa: trascinala o usa le frecce per spostarla, più e meno per ingrandire, zero per rimetterla a posto"
+      >
+        <div class="map__world">
+          <svg class="map__ground" viewBox="0 0 160 160" aria-hidden="true"></svg>
+          <div class="map__places"></div>
+        </div>
+      </div>
+
+      <div class="map__controls">
+        <button type="button" class="map__control" data-zoom="in" aria-label="Ingrandisci">+</button>
+        <button type="button" class="map__control" data-zoom="out" aria-label="Rimpicciolisci">−</button>
+        <button type="button" class="map__control map__control--north" data-zoom="reset" aria-label="Rimetti a posto la mappa">N</button>
+      </div>
+
+      <p class="map__status" aria-live="polite">Scegli un luogo sulla mappa</p>
+
+      <p class="map__stars" aria-label="Livello di ricerca: 3 stelle su 5">
+        <i class="map__star map__star--on"></i>
+        <i class="map__star map__star--on"></i>
+        <i class="map__star map__star--on"></i>
+        <i class="map__star"></i>
+        <i class="map__star"></i>
+      </p>
+
+      <noscript><p class="map__status">La mappa ha bisogno di JavaScript.</p></noscript>
+    </section>
+  </main>
+</body>
+</html>
